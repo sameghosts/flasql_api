@@ -24,11 +24,14 @@ class User(db.Model):
 
   def to_dict(self):
     return {
-      id: self.id,
-      name: self.name,
-      email: self.email,
-      bio: self.bio
+      "id": self.id,
+      "name": self.name,
+      "email": self.email,
+      "bio": self.bio
     }
+  
+  def as_dict(self):
+    return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 post_tags = db.Table(
   "post_tags",
